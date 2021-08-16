@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import GameCell from './GameCell';
 import './GameBoard.css';
 
-class GameBoard extends React.Component {
-  render() {
-    const { gameState, updateGame } = this.props;
+const GameBoard = (props) => {
+    const { gameState, updateGame } = props;
     return (
       <div className="game-board">
         {gameState.map((playerId, i) => (
@@ -18,7 +17,6 @@ class GameBoard extends React.Component {
         ))}
       </div>
     );
-  }
 }
 
 GameBoard.propTypes = {
