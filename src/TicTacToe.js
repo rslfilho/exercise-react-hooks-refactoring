@@ -1,40 +1,45 @@
 import React, { useContext } from 'react';
 import MyContext from './context/MyContext';
 import GameBoard from './GameBoard';
+import {
+  victoryArchivedInColumn,
+  victoryArchivedInDiagonals,
+  victoryArchivedInLine
+} from './helpers'
 
 const TicTacToe = () => {
-  const victoryArchivedInLine = (gameBoard) => {
-    for (let i = 0; i <= 6; i += 3) {
-      if (
-        gameBoard[i] === gameBoard[i + 1]
-        && gameBoard[i + 1] === gameBoard[i + 2]
-        && gameBoard[i] !== 0
-      ) return gameBoard[i];
-    }
-    return false;
-  }
+  // const victoryArchivedInLine = (gameBoard) => {
+  //   for (let i = 0; i <= 6; i += 3) {
+  //     if (
+  //       gameBoard[i] === gameBoard[i + 1]
+  //       && gameBoard[i + 1] === gameBoard[i + 2]
+  //       && gameBoard[i] !== 0
+  //     ) return gameBoard[i];
+  //   }
+  //   return false;
+  // }
 
-  const victoryArchivedInColumn = (gameBoard) => {
-    for (let i = 0; i <= 2; i += 1) {
-      if (
-        gameBoard[i] === gameBoard[i + 3]
-        && gameBoard[i + 3] === gameBoard[i + 6]
-        && gameBoard[i] !== 0
-      ) return gameBoard[i];
-    }
-    return false;
-  }
+  // const victoryArchivedInColumn = (gameBoard) => {
+  //   for (let i = 0; i <= 2; i += 1) {
+  //     if (
+  //       gameBoard[i] === gameBoard[i + 3]
+  //       && gameBoard[i + 3] === gameBoard[i + 6]
+  //       && gameBoard[i] !== 0
+  //     ) return gameBoard[i];
+  //   }
+  //   return false;
+  // }
 
-  const victoryArchivedInDiagonals = (gameBoard) => {
-    if (gameBoard[4] === 0) return false;
-    if (gameBoard[0] === gameBoard[4] && gameBoard[4] === gameBoard[8]) {
-      return gameBoard[0];
-    }
-    if (gameBoard[2] === gameBoard[4] && gameBoard[4] === gameBoard[6]) {
-      return gameBoard[2];
-    }
-    return false;
-  }
+  // const victoryArchivedInDiagonals = (gameBoard) => {
+  //   if (gameBoard[4] === 0) return false;
+  //   if (gameBoard[0] === gameBoard[4] && gameBoard[4] === gameBoard[8]) {
+  //     return gameBoard[0];
+  //   }
+  //   if (gameBoard[2] === gameBoard[4] && gameBoard[4] === gameBoard[6]) {
+  //     return gameBoard[2];
+  //   }
+  //   return false;
+  // }
 
   const { state, resetGame, updateState } = useContext(MyContext)
 
@@ -62,6 +67,7 @@ const TicTacToe = () => {
 
   const { gameBoard } = state;
   const win = victoryArchieved();
+
   if (!gameBoard.includes(0) && !win) {
     return (
       <>
@@ -70,6 +76,7 @@ const TicTacToe = () => {
       </>
     );
   }
+
   return (
     <>
       {renderButton()}
