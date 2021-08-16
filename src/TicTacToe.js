@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import MyContext from './context/MyContext';
 import GameBoard from './GameBoard';
 
 const TicTacToe = () => {
@@ -35,39 +36,7 @@ const TicTacToe = () => {
     return false;
   }
 
-  const [state, setState] = useState({
-    activePlayer: 1,
-    gameBoard: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  })
-
-  const resetGame = () => {
-    setState({
-      activePlayer: 1,
-      gameBoard: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    });
-  }
-
-  const toggleActivePlayer = () => {
-    const { activePlayer } = state;
-    if (activePlayer === 1) return 2;
-    return 1;
-  }
-
-  const updateState = (cellClicked) => {
-    const newState = [...state.gameBoard];
-    let newActivePlayer = state.activePlayer;
-
-    if (state.gameBoard[cellClicked] === 0) {
-      newState[cellClicked] = state.activePlayer;
-      newActivePlayer = toggleActivePlayer();
-    } else newState[cellClicked] = state.gameBoard[cellClicked];
-
-    setState({
-      ...state,
-      activePlayer: newActivePlayer,
-      gameBoard: newState,
-    })
-  }
+  const { state, resetGame, updateState } = useContext(MyContext)
 
   const victoryArchieved = () => {
     const { gameBoard } = state;
